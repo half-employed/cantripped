@@ -1,15 +1,37 @@
-name: "godot gut test"
+# name: "godot gut test"
+# on: [push, pull_request]
+
+# jobs:
+#   execute-gut:
+#     name: Run GUT tests
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Docker test
+#         uses: ceceppa/godot-gut-ci@main
+#         with:
+#           godot_version: 4.7 
+#           gut_params: -gconfig=.gutconfig.json
+
+name: "Run Unit Tests"
 on: [push, pull_request]
 
 jobs:
-  execute-gut:
-    name: Run GUT tests
+  unit-tests:
     runs-on: ubuntu-latest
+    # Use a pre-built Docker image matching your exact Godot version
+    container: barichello/godot-ci:4.7
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Docker test
-        uses: ceceppa/godot-gut-ci@main
-        with:
-          godot_version: 4.7 
-          gut_params: -gconfig=.gutconfig.json
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "Initialize Godot .godot/ folder"
+        run: |
+          mkdir -p .godot
+          godot --headless --editor --quit --path .
+
+      - name: "Run GUT Tests"
+        run: |
+          godot --headless -d -s --path . addons/gut/gut_cmdln.gd
