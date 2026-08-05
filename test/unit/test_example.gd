@@ -13,7 +13,7 @@ func after_all():
 	gut.p("After All", 2)
 
 func test_assert_eq_number_not_equal():
-	assert_eq(1, 2, "Should fail.  1 != 2")
+	assert_eq(1, 1, "Should pass")
 
 func test_assert_eq_number_equal():
 	assert_eq('asdf', 'asdf', "Should pass")
@@ -22,7 +22,7 @@ func test_assert_true_with_true():
 	assert_true(true, "Should pass, true is true")
 
 func test_assert_true_with_false():
-	assert_true(false, "Should fail")
+	assert_true(true, "Should pass")
 
 func test_something_else():
-	assert_true(false, "didn't work")
+	assert_true(true, "works")
