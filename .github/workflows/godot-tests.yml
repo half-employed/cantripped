@@ -1,0 +1,15 @@
+name: "godot gut test"
+on: [push, pull_request]
+
+jobs:
+  execute-gut:
+    name: Run GUT tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Docker test
+        uses: ceceppa/godot-gut-ci@main
+        with:
+          godot_version: 4.7 
+          gut_params: -gconfig=.gutconfig.json
