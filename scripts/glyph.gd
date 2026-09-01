@@ -11,7 +11,7 @@ enum Kind {
 	MODIFIER,
 }
 
-@export var id: StringName
+@export var id: int
 @export var glyph_name: String
 @export var sprite: Texture2D
 @export var sound: AudioStream
