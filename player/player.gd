@@ -47,6 +47,7 @@ class_name Player
 @export var spells: Array = [] # array holding references to spells
 # array untyped, loose for now
 
+# handles gravity + lateral movement then resolves collisions using move_and_slide()
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * ProjectSettings.get_setting("physics/2d/default_gravity") * delta
