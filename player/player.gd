@@ -47,7 +47,10 @@ class_name Player
 @export var spells: Array = [] # array holding references to spells
 # array untyped, loose for now
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y += gravity * ProjectSettings.get_setting("physics/2d/default_gravity") * delta
+
 	var direction := Input.get_axis("move_left", "move_right")
 	velocity.x = direction * speed
 
