@@ -47,6 +47,9 @@ class_name Player
 @export var spells: Array = [] # array holding references to spells
 # array untyped, loose for now
 
+# accumulates fractional mana regen gains so int mana refreshes at a true per-second rate
+var _mana_regen_acc: float = 0.0
+
 # handles gravity + lateral movement then resolves collisions using move_and_slide()
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -56,3 +59,11 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction * speed
 
 	move_and_slide()
+
+# increments mana by mana_regen worth of whole units per second
+func _process(delta: float) -> void:
+	_mana_regen_acc += mana_regen * delta
+	if _mana_regen_acc >= 1.0:
+		var amount := int(_mana_regen_acc)
+		_mana_regen_acc -= amount
+		mana += amount
