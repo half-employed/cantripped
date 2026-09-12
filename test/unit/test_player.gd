@@ -35,6 +35,35 @@ func test_mana_regen_floors_at_zero():
 	player.mana_regen = -2
 	assert_eq(player.mana_regen, 0, "mana_regen should never go negative")
 
+func test_mana_regen_over_time():
+	player.mana_max = 100
+	player.mana = 0
+	for i in 60:
+		player._process(1.0 / 60.0)
+	assert_eq(player.mana, 1, "1 mana_regen should restore 1 mana over 1 second")
+
+func test_mana_regen_preserves_fractional_gains():
+	player.mana_max = 100
+	player.mana = 0
+	player._process(0.5)
+	assert_eq(player.mana, 0, "fractional gains should not be applied early")
+	player._process(0.5)
+	assert_eq(player.mana, 1, "full mana gained after accumulating a whole unit")
+
+func test_mana_regen_caps_at_mana_max():
+	player.mana_max = 5
+	player.mana = 5
+	for i in 60:
+		player._process(1.0 / 60.0)
+	assert_eq(player.mana, 5, "mana should not exceed mana_max")
+
+func test_no_regen_when_mana_regen_zero():
+	player.mana_regen = 0
+	player.mana = 0
+	for i in 60:
+		player._process(1.0 / 60.0)
+	assert_eq(player.mana, 0, "zero regen should never restore mana")
+
 func test_glyph_slots_floors_at_one():
 	player.glyph_slots = 0
 	assert_eq(player.glyph_slots, 1, "glyph_slots should never drop below 1")
