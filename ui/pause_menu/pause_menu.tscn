@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cdrxisr1hd8ey"]
+
+[ext_resource type="Script" uid="uid://3jqgeut2hdre" path="res://ui/pause_menu/pause_menu.gd" id="1_mnjdh"]
+
+[node name="PauseMenu" type="Control" unique_id=2121819369]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mnjdh")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=744648281]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1095526077]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1978710976]
+layout_mode = 2
+text = "Resume"
+
+[node name="KeybindingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1281918336]
+layout_mode = 2
+text = "Keybindings"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1678040592]
+layout_mode = 2
+text = "Exit"
