@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bulo6ilcjsdn4"]
+
+[ext_resource type="Script" uid="uid://1parslew5226" path="res://scripts/debug_console.gd" id="1_gpuxc"]
+
+[node name="DebugConsole" type="CanvasLayer" unique_id=2042977418]
+script = ExtResource("1_gpuxc")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1383269442]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 920.0
+offset_bottom = 370.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1655705120]
+layout_mode = 2
+
+[node name="OutputLog" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=1989988488]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InputField" type="LineEdit" parent="PanelContainer/VBoxContainer" unique_id=2103846940]
+layout_mode = 2
+placeholder_text = "Type a command..."
