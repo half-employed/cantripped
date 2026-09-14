@@ -42,6 +42,22 @@ func test_mana_regen_over_time():
 		player._process(1.0 / 60.0)
 	assert_eq(player.mana, 1, "1 mana_regen should restore 1 mana over 1 second")
 
+# added additional two tests to verify whether mana_regen is actually followed
+func test_mana_regen_scales_with_elapsed_time():
+	player.mana_max = 100
+	player.mana = 0
+	for i in 180:
+		player._process(1.0 / 60.0)
+	assert_eq(player.mana, 3, "1 mana_regen should restore 3 mana over 3 seconds")
+
+func test_mana_regen_scales_with_regen_rate():
+	player.mana_max = 100
+	player.mana = 0
+	player.mana_regen = 3
+	for i in 60:
+		player._process(1.0 / 60.0)
+	assert_eq(player.mana, 3, "3 mana_regen should restore 3 mana over 1 second")
+
 func test_mana_regen_preserves_fractional_gains():
 	player.mana_max = 100
 	player.mana = 0
